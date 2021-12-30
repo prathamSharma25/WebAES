@@ -16,6 +16,16 @@ Three different approaches were tested for the main logic of this system which i
 2. **BERT Model**: A pre-trained BERT (Bi-directional Encoder Representations from Transformers) model is used to generate vector representations of student's response and faculty's expected answer. Cosine similarity measure is used to determine the similarity score between the two documents and hence the marks scored by the student. This approach achieves better results than the Doc2Vec approach.
 3. **LDA + BERT**: To make the previously mentioned approach even more robust, an LDA (Latent Dirichlet Allocation) model is used to extract the topic from a given text document. This LDA model is trained using the text8 corpus and saved for later use. The trained LDA model is then used to determine the topic for the student's response as well as the faculty's expected answer. Only if both topics match, marks are awarded to the student using the previously mentioned approach. This approach achieves best results for the given problem.
 
+## Screenshots
+### Application Homepage
+![Homepage](/screenshots/index.png)
+
+### Student Homepage
+![Student Homepage](/screenshots/student-home.png)
+
+### Faculty Homepage
+![Faculty Homepage](/screenshots/faculty-home.png)
+
 ---
 
 Pratham Sharma
