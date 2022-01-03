@@ -1,0 +1,6 @@
+## Description of Jupyter Notebooks
+1. **WebAES-Doc2Vec-Model.ipynb**: Training of a Doc2Vec model using the text8 corpus to generate 50-dimensional vector representatins of text documents. The model is trained for 40 epochs and the trained Doc2Vec model is saved for later use in automatic evaluation of students answers.
+2. **WebAES-Doc2Vec-Evaluation.ipynb**: The previously trained Doc2vec model is used to evaluate descriptive answers submitted by a student by determining the degree of similarity between the vector representations of each text document (student's reponse and faculty's expected answer). Marks are awarded accordingly.
+3. **WebAES-BERT-Evaluation.ipynb**: A pre-trained BERT model is used to generate vector representations of student's reponse and faculty's expected answer to a given question. Degree of simialrity, and hence marks scored, is determined using cosine similarity measure.
+4. **WebAES-LDA-Model.ipynb**: An Latent Dirichlet Allocation (LDA) model is trained using the text8 corpus to extract topics from a given text document. The trained LDA model is saved for later use.
+5. **WebAES-LDA-BERT-Evaluation.ipynb**: The previously trained LDA model is used along with a pre-trained BERT model to perform automatic answer evaluation. The approach described in this notebook is implemented in the web application.
