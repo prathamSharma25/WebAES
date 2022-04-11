@@ -1,4 +1,5 @@
 <?php
+    set_time_limit(600);
     include('student-session.php');
 
     $student_ID = $login_id;
