@@ -6,7 +6,7 @@
     <head>
         <title>Available Tests - WebAES for Students</title>
         <meta charset='UTF-8'>
-        <link rel='stylesheet' type='text/css' href='css\style.css'>
+        <link rel='stylesheet' type='text/css' href='style.css'>
         <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
     </head>
     <body>
@@ -18,11 +18,11 @@
         </div>
         <div class='main-content'>
             <?php
-                $sql = 'SELECT test_ID, test_name FROM tests';
+                $sql = "SELECT test_ID, test_name FROM tests WHERE test_ID not in (select test_ID from scores where student_ID = '$login_id')";
                 $result = mysqli_query($db, $sql);
 
                 if(mysqli_num_rows($result)==0){
-                    echo '<h2 class="align-center" style="color: red;">No tests available!</h2>';
+                    echo '<h2 class="align-center" style="color: red;">No new tests available! Check again later.</h2>';
                 }
                 else{
                     echo '<h2 class="align-center">Available Tests</h2><br>

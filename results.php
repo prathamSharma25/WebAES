@@ -6,7 +6,7 @@
     <head>
         <title>View Results - WebAES for Students</title>
         <meta charset='UTF-8'>
-        <link rel='stylesheet' type='text/css' href='css\style.css'>
+        <link rel='stylesheet' type='text/css' href='style.css'>
         <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
     </head>
     <body>
@@ -34,8 +34,8 @@
                         
                     while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
                         echo '<tr>
-                                <td>' . $row["test_name"] . '</td>
-                                <td>' . $row["score"] . ' / 30.00</td>
+                                <td class="align-center">' . $row["test_name"] . '</td>
+                                <td class="align-center">' . $row["score"] . ' / 30.00</td>
                             </tr>';
                     }
 

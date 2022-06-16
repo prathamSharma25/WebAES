@@ -6,7 +6,7 @@
     <head>
         <title>Home - WebAES for Faculties</title>
         <meta charset='UTF-8'>
-        <link rel='stylesheet' type='text/css' href='css\style.css'>
+        <link rel='stylesheet' type='text/css' href='style.css'>
         <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
     </head>
     <body>
@@ -34,6 +34,15 @@
                         <p>Create and manage tests for your class.</p>
                         <hr>
                         <p class='align-right'><a href='tests.php'>Tests</a></p>
+                    </div>
+                </div>
+                <div class='three-column'>
+                    <div class='card'>
+                        <h4>Student Results</h4>
+                        <hr>
+                        <p>View results for students.</p>
+                        <hr>
+                        <p class='align-right'><a href='faculty-results-view.php'>Student Results</a></p>
                     </div>
                 </div>
                 <div class='three-column'>

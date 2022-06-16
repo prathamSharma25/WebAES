@@ -1,33 +1,42 @@
 # Import required libraries and packages
 # To handle command line arguments
 import sys
+
 # To perform string operations
 import string
+
 # Read and write data using CSV files
 import pandas as pd
+
 # To perform text preprocessing operations
 import nltk
+
 # To remove English language stopwords
 from nltk.corpus import stopwords
-nltk.download('stopwords')
+
+nltk.download("stopwords")
 # Set of English language stopwords
-EN_STOPWORDS = set(stopwords.words('english'))
+EN_STOPWORDS = set(stopwords.words("english"))
 # For text corpus and LDA model
 from gensim import corpora, models
 import gensim.downloader as api
+
 # For loading pre-trained BERT model
 from sentence_transformers import SentenceTransformer
+
 # To determine similarity score
 from sklearn.metrics.pairwise import cosine_similarity
+
 # Supress warnings
 import warnings
-warnings.filterwarnings('ignore')
+
+warnings.filterwarnings("ignore")
 
 # Load pre-trained LDA model
-lda_model = models.LdaModel.load('models\WebAES_LDA_Model.model')
+lda_model = models.LdaModel.load("WebAES_LDA_Model.model")
 
 # Load text corpus
-text8_corpus = api.load('text8')
+text8_corpus = api.load("text8")
 text8_corpus = [doc for doc in text8_corpus]
 # create a list of list of tokens for each dpcument in the text corpus
 list_of_list_of_tokens = []
@@ -42,13 +51,14 @@ dictionary_LDA = corpora.Dictionary(list_of_list_of_tokens)
 # Function to preprocess text document
 def preprocess(text):
     # Remove punctuations from text and convert to lowercase
-    text = text.translate(str.maketrans('', '', string.punctuation)).lower()
+    text = text.translate(str.maketrans("", "", string.punctuation)).lower()
     # Remove English stopwords from text
-    text = ' '.join([w for w in text.split() if not w.lower() in EN_STOPWORDS])
+    text = " ".join([w for w in text.split() if not w.lower() in EN_STOPWORDS])
     # Split text to create a list of tokens
     text_tokens = text.split()
     # Return the list of tokens
     return text_tokens
+
 
 # Function to get the topic probability and index for given text document
 def get_topic_prob(text_tokens):
@@ -65,14 +75,16 @@ def get_topic_prob(text_tokens):
     # Return topic probability and index of most similar topic
     return max_prob_topic, max_prob
 
+
 # Function to generate embeddings for documents using pre-trained BERT model
 def get_bert_embeddings(docs):
     # Load pre-trained BERT model
-    BERT_model = SentenceTransformer('bert-base-nli-mean-tokens')
+    BERT_model = SentenceTransformer("bert-base-nli-mean-tokens")
     # Generate vector embeddings for documents
     doc_embeddings = BERT_model.encode(docs)
     # Return document vector embeddings
     return doc_embeddings
+
 
 # Function to calculate similarityt socre between documents
 def similarity(doc_embeddings):
@@ -80,6 +92,7 @@ def similarity(doc_embeddings):
     sim_score = cosine_similarity([doc_embeddings[0]], doc_embeddings[1:])[0][0]
     # Return cosine similarity score
     return sim_score
+
 
 # Function to evaluate test for student
 def evaluate(expected, response):
@@ -97,33 +110,34 @@ def evaluate(expected, response):
     # Calculate similarity score
     sim_score = similarity(doc_embeddings)
     # Award marks only if topic indices match for both texts
-    if stu_ans_topic==exp_ans_topic:
-        marks = (stu_ans_topic_prob/exp_ans_topic_prob)*sim_score*10
+    if stu_ans_topic == exp_ans_topic:
+        marks = (stu_ans_topic_prob / exp_ans_topic_prob) * sim_score * 10
     else:
         marks = 0
     # Return marks evalauted for the student
     return marks
+
 
 # Read path to answers file saved by application
 answers_file = sys.argv[1]
 # Read CSV file
 answers_DF = pd.read_csv(answers_file)
 # Student's answer and faculty's expected answer for question 1
-stu_ans1 = answers_DF['student1'][0]
-exp_ans1 = answers_DF['expected1'][0]
+stu_ans1 = answers_DF["student1"][0]
+exp_ans1 = answers_DF["expected1"][0]
 # Student's answer and faculty's expected answer for question 1
-stu_ans2 = answers_DF['student2'][0]
-exp_ans2 = answers_DF['expected2'][0]
+stu_ans2 = answers_DF["student2"][0]
+exp_ans2 = answers_DF["expected2"][0]
 # Student's answer and faculty's expected answer for question 1
-stu_ans3 = answers_DF['student3'][0]
-exp_ans3 = answers_DF['expected3'][0]
+stu_ans3 = answers_DF["student3"][0]
+exp_ans3 = answers_DF["expected3"][0]
 # Evaluate answers and get marks scored by students
 question1_marks = round(evaluate(exp_ans1, stu_ans1), 2)
 question2_marks = round(evaluate(exp_ans2, stu_ans2), 2)
 question3_marks = round(evaluate(exp_ans3, stu_ans3), 2)
 # Total marks
 total = question1_marks + question2_marks + question3_marks
-if total<0:
+if total < 0:
     total = 0
 # Return marks scored to application
 print(total)

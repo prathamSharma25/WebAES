@@ -6,7 +6,7 @@
     <head>
         <title>Available Questions - WebAES for Faculties</title>
         <meta charset='UTF-8'>
-        <link rel='stylesheet' type='text/css' href='css\style.css'>
+        <link rel='stylesheet' type='text/css' href='style.css'>
         <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
     </head>
     <body>
@@ -36,7 +36,7 @@
                         
                     while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
                         echo '<tr>
-                                <td>' . $row["question_ID"] . '</td>
+                                <td class="align-center">' . $row["question_ID"] . '</td>
                                 <td>' . $row["prompt"] . '</td>
                                 <td>' . $row["expected_answer"] . '</td>
                             </tr>';
